@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Rubik:wght@300;400;500;600&family=Work+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a0ef02a554.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="music-player">
+        <nav>
+            <div class="circle">
+                <i class="fa-solid fa-angle-left"></i> 
+            </div>
+            <div class="circle">
+                <i class="fa-solid fa-bars"></i> 
+            </div>
+        </nav>
+        <img src="thumbnail-image.png" class="song-img" alt="">
+        <h1>Pyaar Karte Ho Na</h1>
+        <p>Song by Javed-Mohsin, Shreya Ghoshal, and Stebin Ben</p>
+
+        <audio  id="song">
+            <source src="Tumse-Pyaar-Karke.mp3" type="audio/mpeg">
+        </audio>
+        <input type="range" value="0" id="progress">
+        <div class="controls">
+            <div><i class="fa-solid fa-backward"></i></div>
+            <div onclick="playPause()"><i class="fa-solid fa-play" id="ctrlIcon"></i></div>
+            <div><i class="fa-solid fa-forward"></i></div>
+        </div>
+        </div>
+    </div>
+
+    <script>
+        let progress= document.getElementById('progress');
+        let song = document.getElementById("song");
+        let ctrlIcon = document.getElementById("ctrlIcon");
+        
+        song.onloadedmetadata= function(){
+            progress.max= song.duration;
+            progress.value= song.currentTime;
+        }
+
+       function playPause(){
+        if(ctrlIcon.classList.contains("fa-pause")){
+            song.pause();
+            ctrlIcon.classList.remove('fa-pause');
+            ctrlIcon.classList.add('fa-play');
+        }else{
+            song.play();
+            ctrlIcon.classList.remove('fa-play');
+            ctrlIcon.classList.add('fa-pause');
+        }
+       }
+
+       if(song.play()){
+
+        setInterval(() => {
+            progress.value= song.currentTime;
+        }, 500);
+       }
+
+       progress.onchange= function(){
+        song.play();
+        song.currentTime= progress.value;
+        ctrlIcon.classList.remove('fa-play');
+        ctrlIcon.classList.add('fa-pause');
+       }
+
+    </script>
+</body>
+</html>
