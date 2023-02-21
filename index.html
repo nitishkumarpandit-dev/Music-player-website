@@ -17,31 +17,56 @@
             <div class="circle">
                 <i class="fa-solid fa-angle-left"></i> 
             </div>
+            <div> <h2>Nitish Kumar</h2></div>
             <div class="circle">
                 <i class="fa-solid fa-bars"></i> 
             </div>
         </nav>
-        <img src="thumbnail-image.png" class="song-img" alt="">
-        <h1>Pyaar Karte Ho Na</h1>
-        <p>Song by Javed-Mohsin, Shreya Ghoshal, and Stebin Ben</p>
+        <img src="thumbnail-image.png" id="song-img" alt="">
+        <h1 id="upperText">Pyaar Karte Ho Na</h1>
+        <p id="downText">Song by Javed-Mohsin, Shreya Ghoshal, and Stebin Ben</p>
 
-        <audio  id="song">
-            <source src="Tumse-Pyaar-Karke.mp3" type="audio/mpeg">
+        <audio  id="song" >
+            <!-- <source  src="Tumse-Pyaar-Karke.mp3" type="audio/mpeg"> -->
+            <source src="Oh Antava Mava_192(PagalWorld.com.se).mp3">
+           
         </audio>
         <input type="range" value="0" id="progress">
         <div class="controls">
-            <div><i class="fa-solid fa-backward"></i></div>
+            <div onclick="previousSong()"><i class="fa-solid fa-backward" id="previousSong"></i></div>
             <div onclick="playPause()"><i class="fa-solid fa-play" id="ctrlIcon"></i></div>
-            <div><i class="fa-solid fa-forward"></i></div>
+            <div onclick="nextSong()"><i class="fa-solid fa-forward" id="aglaSong" ></i></div>
         </div>
         </div>
+        
     </div>
 
     <script>
+      
+      let c=0;
+    //   let songs= ["Tumse-Pyaar-Karke.mp3","Meri-Zindagi-Hai-Tu.mp3","O Sajna_192(PagalWorld.com.se).mp3","Oh Antava Mava_192(PagalWorld.com.se).mp3", "Baarish Mein Tum_192(PagalWorld.com.se).mp3","Dil Galti Kar Baitha Hai_192(PagalWorld.com.se).mp3","Kesariya_192(PagalWorld.com.se).mp3","Maan Meri Jaan_192(PagalWorld.com.se).mp3"];
+
+     let songs=
+    [
+        {songPath: "Tumse-Pyaar-Karke.mp3", upperText: "Tumse Pyaar Karke", downText: "Song by Jubin Nautiyal, Payal Dev, and Tulsi Kumar", coverPath: "image-1.jpg" },
+        {songPath: "Meri-Zindagi-Hai-Tu.mp3", upperText: "Meri Zindagi Hai Tu", downText: "Song by Jubin Nautiyal and Neeti Mohan", coverPath: "image-2.jpg" },
+        {songPath: "O Sajna_192(PagalWorld.com.se).mp3", upperText: "O Sajna", downText: "Song by Lalit Sen, Neha Kakkar, and Tanishk Bagchi", coverPath: "image-3.jpg" },
+        {songPath: "Oh Antava Mava_192(PagalWorld.com.se).mp3", upperText: "Oo Antava Oo Oo Antava", downText: "Song by Indravathi Chauhan", coverPath: "image-4.jpg" },
+        {songPath: "Baarish Mein Tum_192(PagalWorld.com.se).mp3", upperText: "Baarish Mein Tum", downText: "Baarish Mein Tum Lyrics by Neha Kakkar ft", coverPath: "image-5.jpg" },
+        {songPath: "Dil Galti Kar Baitha Hai_192(PagalWorld.com.se).mp3", upperText: "Dil Galti Kar Baitha Hai", downText: "Song by Jubin Nautiyal, Meet Bros, and Shardul Rathod", coverPath: "image-6.jpg" },
+        {songPath: "Kesariya_192(PagalWorld.com.se).mp3", upperText: "Kesariya", downText: "Song by Arijit Singh", coverPath: "image-7.jpg" },
+        {songPath: "Maan Meri Jaan_192(PagalWorld.com.se).mp3", upperText: "Maan Meri Jaan", downText: "Song by king", coverPath: "image-7.jpg" }
+    ]
+
+
+
+
         let progress= document.getElementById('progress');
         let song = document.getElementById("song");
         let ctrlIcon = document.getElementById("ctrlIcon");
-        
+        // let aglaSong= document.getElementById("aglaSong");
+        // let previousSong= document.getElementById
+
         song.onloadedmetadata= function(){
             progress.max= song.duration;
             progress.value= song.currentTime;
@@ -57,7 +82,44 @@
             ctrlIcon.classList.remove('fa-play');
             ctrlIcon.classList.add('fa-pause');
         }
-       }
+    }
+        function nextSong(){
+            c++;
+           if(c>=songs.length){
+            c=0;
+           }
+            document.getElementById("song").src=songs[c].songPath;
+            document.getElementById("song-img").src=songs[c].coverPath;
+            document.getElementById("upperText").innerText= songs[c].upperText;
+            document.getElementById("downText").innerText= songs[c].downText;
+            ctrlIcon.classList.remove('fa-pause');
+            ctrlIcon.classList.add('fa-play');
+           playPause();
+          
+
+        }
+
+
+        function previousSong(){
+            c--;
+            if(c<0){
+            c=0;
+            }
+            let b= document.getElementById("song").src=songs[c].songPath;
+            document.getElementById("song-img").src=songs[c].coverPath;
+            document.getElementById("upperText").innerText= songs[c].upperText;
+            document.getElementById("downText").innerText= songs[c].downText;
+            ctrlIcon.classList.remove('fa-pause');
+            ctrlIcon.classList.add('fa-play');
+            playPause();
+            
+        }
+           
+        
+
+       
+
+   
 
        if(song.play()){
 

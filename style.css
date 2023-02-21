@@ -37,8 +37,9 @@ nav .circle{
     box-shadow: 0 5px 10px rgba(255, 26, 26, 0.22);
 
 }
-.song-img{
+#song-img{
     width: 220px;
+    height: 220px;
     border-radius: 50%;
     border: 8px solid #fff;
     box-shadow: 0 10px 60px rgba(255, 26, 26,0.22);
@@ -94,9 +95,20 @@ nav .circle{
     color: #f53192;
     cursor: pointer;
 }
+.controls div:hover{
+    background-color: rgb(243, 181, 227);
+}
 
 .controls div:nth-child(2){
     transform: scale(1.5);
     background: #f53192;
     color: #fff;
+}
+
+h2{
+  
+    color: #f53192;
+    font-family: "Poppins", sans-serif;
+    text-transform: uppercase;
+
 }
